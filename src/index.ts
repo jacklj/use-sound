@@ -90,6 +90,13 @@ export default function useSound(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [volume, playbackRate]);
 
+  React.useEffect(() => {
+    if (sound && isPlaying && !soundEnabled) {
+      sound.stop();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying, soundEnabled]);
+
   const play: PlayFunction = React.useCallback(
     (options?: PlayOptions) => {
       if (typeof options === 'undefined') {
